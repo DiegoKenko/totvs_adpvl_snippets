@@ -1,0 +1,712 @@
+{
+	"// ===== VARIABLE DECLARATIONS =====": {},
+	
+	"Local Variable": {
+		"prefix": "local",
+		"body": ["Local ${1:cVariable} := ${2:\"value\"}"],
+		"description": "Create a local variable with optional assignment"
+	},
+	
+	"Local Typed Variable": {
+		"prefix": "localas",
+		"body": ["Local ${1:cVariable} AS ${2|Character,Numeric,Logical,Date,Array,Object,CodeBlock,Json,Variant|}"],
+		"description": "Create a typed local variable"
+	},
+	
+	"Private Variable": {
+		"prefix": "private",
+		"body": ["Private ${1:cVariable} := ${2:\"value\"}"],
+		"description": "Create a private variable with file scope"
+	},
+	
+	"Static Variable": {
+		"prefix": "static",
+		"body": ["Static ${1:nVariable} := ${2:0}"],
+		"description": "Create a static variable that maintains value between calls"
+	},
+	
+	"Public Variable": {
+		"prefix": "public",
+		"body": ["Public ${1:cVariable} := ${2:\"value\"}"],
+		"description": "Create a public global variable"
+	},
+
+	"// ===== CONTROL FLOW =====": {},
+	
+	"If Statement": {
+		"prefix": "if",
+		"body": [
+			"If ${1:condition}",
+			"\t$0",
+			"EndIf"
+		],
+		"description": "Basic if statement"
+	},
+	
+	"If-Else Statement": {
+		"prefix": "ifelse",
+		"body": [
+			"If ${1:condition}",
+			"\t${2:// if block}",
+			"Else",
+			"\t${3:// else block}",
+			"EndIf"
+		],
+		"description": "If-else statement"
+	},
+	
+	"If-ElseIf-Else Statement": {
+		"prefix": "ifelseif",
+		"body": [
+			"If ${1:condition1}",
+			"\t${2:// first condition}",
+			"ElseIf ${3:condition2}",
+			"\t${4:// second condition}",
+			"Else",
+			"\t${5:// default}",
+			"EndIf"
+		],
+		"description": "If-elseif-else statement"
+	},
+	
+	"Do Case Statement": {
+		"prefix": "docase",
+		"body": [
+			"Do Case",
+			"\tCase ${1:condition1}",
+			"\t\t${2:// case 1}",
+			"\tCase ${3:condition2}",
+			"\t\t${4:// case 2}",
+			"\tOtherwise",
+			"\t\t${5:// default case}",
+			"EndCase"
+		],
+		"description": "Do case statement for multiple conditions"
+	},
+
+	"// ===== LOOPS =====": {},
+	
+	"For Loop": {
+		"prefix": "for",
+		"body": [
+			"For ${1:nI} := ${2:1} To ${3:10}",
+			"\t$0",
+			"Next ${1:nI}"
+		],
+		"description": "Basic for loop"
+	},
+	
+	"For Loop with Step": {
+		"prefix": "forstep",
+		"body": [
+			"For ${1:nI} := ${2:1} To ${3:100} Step ${4:5}",
+			"\t$0",
+			"Next ${1:nI}"
+		],
+		"description": "For loop with custom step"
+	},
+	
+	"While Loop": {
+		"prefix": "while",
+		"body": [
+			"While ${1:condition}",
+			"\t$0",
+			"End"
+		],
+		"description": "While loop"
+	},
+	
+	"Loop Control - Exit": {
+		"prefix": "exit",
+		"body": ["Exit"],
+		"description": "Break out of loop"
+	},
+	
+	"Loop Control - Loop": {
+		"prefix": "loop",
+		"body": ["Loop"],
+		"description": "Continue to next iteration"
+	},
+
+	"// ===== FUNCTIONS =====": {},
+	
+	"Function with Documentation": {
+		"prefix": "function",
+		"body": [
+			"/*/{Protheus.doc} ${1:FunctionName}",
+			"\t${2:Function description}",
+			"\t@type  Function",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"\t@param ${6:param}, ${7:type}, ${8:description}",
+			"\t@return ${9:return_var}, ${10:return_type}, ${11:return_description}",
+			"/*/",
+			"Function ${1:FunctionName}(${6:param})",
+			"\tLocal ${12:cResult} := ${13:\"\"}",
+			"\t",
+			"\t$0",
+			"\t",
+			"Return ${12:cResult}"
+		],
+		"description": "Function declaration with Protheus.doc documentation"
+	},
+	
+	"Static Function": {
+		"prefix": "staticfunc",
+		"body": [
+			"/*/{Protheus.doc} ${1:FunctionName}",
+			"\t${2:Static function description}",
+			"\t@type  Static Function",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"\t@param ${6:param}, ${7:type}, ${8:description}",
+			"\t@return ${9:return_var}, ${10:return_type}, ${11:return_description}",
+			"/*/",
+			"Static Function ${1:FunctionName}(${6:param})",
+			"\tLocal ${12:cResult} := ${13:\"\"}",
+			"\t",
+			"\t$0",
+			"\t",
+			"Return ${12:cResult}"
+		],
+		"description": "Static function declaration with documentation"
+	},
+	
+	"Main Function": {
+		"prefix": "main",
+		"body": [
+			"/*/{Protheus.doc} Main",
+			"\t${1:Main function description}",
+			"\t@type  Function",
+			"\t@author ${2:$TM_USERNAME}",
+			"\t@since ${3:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${4:1.0}",
+			"/*/",
+			"Function Main()",
+			"\t$0",
+			"Return"
+		],
+		"description": "Main function entry point"
+	},
+	
+	"User Function": {
+		"prefix": "user",
+		"body": [
+			"/*/{Protheus.doc} U_${1:FunctionName}",
+			"\t${2:User function description}",
+			"\t@type  User Function",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"User Function ${1:FunctionName}()",
+			"\t$0",
+			"Return"
+		],
+		"description": "User function declaration"
+	},
+
+	"// ===== OBJECT-ORIENTED PROGRAMMING =====": {},
+	
+	"Class Declaration": {
+		"prefix": "class",
+		"body": [
+			"/*/{Protheus.doc} ${1:ClassName}",
+			"\t${2:Class description}",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"Class ${1:ClassName}",
+			"\tData ${6:cProperty}",
+			"\tData ${7:nValue}",
+			"\t",
+			"\tMethod New() Constructor",
+			"\tMethod ${8:MethodName}()",
+			"EndClass"
+		],
+		"description": "Class declaration with basic structure"
+	},
+	
+	"Class with Inheritance": {
+		"prefix": "classfrom",
+		"body": [
+			"/*/{Protheus.doc} ${1:ClassName}",
+			"\t${2:Derived class description}",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"Class ${1:ClassName} From ${6:ParentClass}",
+			"\tData ${7:cNewProperty}",
+			"\t",
+			"\tMethod New() Constructor",
+			"\tMethod ${8:MethodName}()",
+			"EndClass"
+		],
+		"description": "Class declaration with inheritance"
+	},
+	
+	"Method Implementation": {
+		"prefix": "method",
+		"body": [
+			"/*/{Protheus.doc} ${1:MethodName}",
+			"\t${2:Method description}",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"Method ${1:MethodName}(${6:param}) Class ${7:ClassName}",
+			"\t$0",
+			"Return ${8:result}"
+		],
+		"description": "Method implementation with documentation"
+	},
+	
+	"Constructor Method": {
+		"prefix": "constructor",
+		"body": [
+			"Method New() Class ${1:ClassName}",
+			"\t::${2:cProperty} := ${3:\"\"}",
+			"\t::${4:nValue} := ${5:0}",
+			"\t$0",
+			"Return Self"
+		],
+		"description": "Constructor method for class"
+	},
+
+	"// ===== WEB SERVICES =====": {},
+	
+	"WSService Declaration": {
+		"prefix": "wsservice",
+		"body": [
+			"WSService ${1:ServiceName} Description \"${2:Service description}\"",
+			"\tWSData ${3:cParam} AS String",
+			"\tWSData ${4:nValue} AS Integer",
+			"\t",
+			"\tWSMethod ${5:MethodName} Description \"${6:Method description}\"",
+			"EndWSService"
+		],
+		"description": "Web Service declaration"
+	},
+	
+	"WSMethod Implementation": {
+		"prefix": "wsmethod",
+		"body": [
+			"WSMethod ${1:MethodName} WSReceive ${2:cParam}, ${3:nValue} WSService ${4:ServiceName}",
+			"\t$0",
+			"Return .T."
+		],
+		"description": "Web Service method implementation"
+	},
+	
+	"WSStruct Declaration": {
+		"prefix": "wsstruct",
+		"body": [
+			"WSStruct ${1:StructName}",
+			"\tWSData ${2:cField1} AS String",
+			"\tWSData ${3:nField2} AS Integer",
+			"\tWSData ${4:lField3} AS Boolean Optional",
+			"\tWSData ${5:aField4} AS Array Of String",
+			"EndWSStruct"
+		],
+		"description": "Web Service structure declaration"
+	},
+	
+	"WSClient Declaration": {
+		"prefix": "wsclient",
+		"body": ["WSClient ${1:ClientName}"],
+		"description": "Web Service client declaration"
+	},
+	
+	"WSRestful Declaration": {
+		"prefix": "wsrestful",
+		"body": ["WSRestful ${1:RestfulName}"],
+		"description": "RESTful web service declaration"
+	},
+
+	"// ===== EMBEDDED CONTENT =====": {},
+	
+	"JavaScript Content": {
+		"prefix": "beginjs",
+		"body": [
+			"BeginContent Var ${1:cJSCode} As JavaScript",
+			"\tfunction ${2:myFunction}() {",
+			"\t\tconsole.log(\"${3:Hello from JavaScript}\");",
+			"\t\treturn %${4:cAdvPLVariable}%;",
+			"\t}",
+			"EndContent"
+		],
+		"description": "Embedded JavaScript content block"
+	},
+	
+	"TypeScript Content": {
+		"prefix": "begints",
+		"body": [
+			"BeginContent Var ${1:cTSCode} As TypeScript",
+			"\tinterface ${2:MyInterface} {",
+			"\t\tname: string;",
+			"\t\tvalue: number;",
+			"\t}",
+			"\t",
+			"\tfunction ${3:processData}(data: ${2:MyInterface}): string {",
+			"\t\treturn `\\${data.name}: \\${data.value}`;",
+			"\t}",
+			"EndContent"
+		],
+		"description": "Embedded TypeScript content block"
+	},
+	
+	"HTML Content": {
+		"prefix": "beginhtml",
+		"body": [
+			"BeginContent Var ${1:cHTMLCode} As HTML",
+			"\t<div class=\"${2:container}\">",
+			"\t\t<h1>%${3:cTitle}%</h1>",
+			"\t\t<p>%${4:cContent}%</p>",
+			"\t</div>",
+			"EndContent"
+		],
+		"description": "Embedded HTML content block"
+	},
+	
+	"CSS Content": {
+		"prefix": "begincss",
+		"body": [
+			"BeginContent Var ${1:cCSSCode} As CSS",
+			"\t.${2:my-class} {",
+			"\t\tcolor: %${3:cTextColor}%;",
+			"\t\tfont-size: ${4:14px};",
+			"\t}",
+			"EndContent"
+		],
+		"description": "Embedded CSS content block"
+	},
+	
+	"JSON Content": {
+		"prefix": "beginjson",
+		"body": [
+			"BeginContent Var ${1:cJSONCode} As JSON",
+			"\t{",
+			"\t\t\"name\": \"%${2:cName}%\",",
+			"\t\t\"value\": %${3:nValue}%,",
+			"\t\t\"active\": %${4:lActive}%",
+			"\t}",
+			"EndContent"
+		],
+		"description": "Embedded JSON content block"
+	},
+	
+	"XML Content": {
+		"prefix": "beginxml",
+		"body": [
+			"BeginContent Var ${1:cXMLCode} As XML",
+			"\t<${2:root}>",
+			"\t\t<${3:item} name=\"%${4:cName}%\" value=\"%${5:nValue}%\" />",
+			"\t</${2:root}>",
+			"EndContent"
+		],
+		"description": "Embedded XML content block"
+	},
+
+	"// ===== PREPROCESSOR DIRECTIVES =====": {},
+	
+	"Include Directive": {
+		"prefix": "include",
+		"body": ["#Include \"${1:protheus.ch}\""],
+		"description": "Include preprocessor directive"
+	},
+	
+	"Define Directive": {
+		"prefix": "define",
+		"body": ["#Define ${1:CONSTANT} ${2:value}"],
+		"description": "Define preprocessor directive"
+	},
+	
+	"IfDef Block": {
+		"prefix": "ifdef",
+		"body": [
+			"#IfDef ${1:DEBUG}",
+			"\t${2:// debug code}",
+			"#EndIf"
+		],
+		"description": "Conditional compilation ifdef block"
+	},
+	
+	"IfDef-Else Block": {
+		"prefix": "ifdefelse",
+		"body": [
+			"#IfDef ${1:DEBUG}",
+			"\t${2:// debug code}",
+			"#Else",
+			"\t${3:// release code}",
+			"#EndIf"
+		],
+		"description": "Conditional compilation ifdef-else block"
+	},
+	
+	"IfNDef Block": {
+		"prefix": "ifndef",
+		"body": [
+			"#IfNDef ${1:PRODUCTION}",
+			"\t${2:// development code}",
+			"#EndIf"
+		],
+		"description": "Conditional compilation ifndef block"
+	},
+	
+	"XCommand Directive": {
+		"prefix": "xcommand",
+		"body": ["#XCommand ${1:command} => ${2:translation}"],
+		"description": "Command translation directive"
+	},
+	
+	"XTranslate Directive": {
+		"prefix": "xtranslate",
+		"body": ["#XTranslate ${1:pattern} => ${2:replacement}"],
+		"description": "Pattern translation directive"
+	},
+
+	"// ===== OPERATORS =====": {},
+	
+	"Assignment Operator": {
+		"prefix": ":=",
+		"body": [":= ${1:value}"],
+		"description": "Assignment operator"
+	},
+	
+	"Increment Operator": {
+		"prefix": "++",
+		"body": ["++"],
+		"description": "Increment operator"
+	},
+	
+	"Decrement Operator": {
+		"prefix": "--",
+		"body": ["--"],
+		"description": "Decrement operator"
+	},
+	
+	"Logical AND": {
+		"prefix": ".and.",
+		"body": [".And."],
+		"description": "Logical AND operator"
+	},
+	
+	"Logical OR": {
+		"prefix": ".or.",
+		"body": [".Or."],
+		"description": "Logical OR operator"
+	},
+	
+	"Logical NOT": {
+		"prefix": ".not.",
+		"body": [".Not."],
+		"description": "Logical NOT operator"
+	},
+
+	"// ===== DATA TYPES AND CONSTANTS =====": {},
+	
+	"True Constant": {
+		"prefix": ".t.",
+		"body": [".T."],
+		"description": "Boolean true constant"
+	},
+	
+	"False Constant": {
+		"prefix": ".f.",
+		"body": [".F."],
+		"description": "Boolean false constant"
+	},
+	
+	"Nil Constant": {
+		"prefix": "nil",
+		"body": ["Nil"],
+		"description": "Null/undefined value constant"
+	},
+
+	"// ===== UI AND DIALOG =====": {},
+	
+	"Define Dialog": {
+		"prefix": "definedialog",
+		"body": [
+			"Define Dialog ${1:oDlg} Title \"${2:Dialog Title}\" From ${3:0},${4:0} To ${5:200},${6:300} Pixel",
+			"\t$0",
+			"Activate Dialog ${1:oDlg} Centered"
+		],
+		"description": "Define and activate dialog"
+	},
+	
+	"Activate Dialog": {
+		"prefix": "activatedialog",
+		"body": ["Activate Dialog ${1:oDlg} Centered"],
+		"description": "Activate dialog centered"
+	},
+
+	"// ===== DATABASE OPERATIONS =====": {},
+	
+	"Select Area": {
+		"prefix": "select",
+		"body": ["Select ${1:Area}"],
+		"description": "Select database area"
+	},
+	
+	"Use Table": {
+		"prefix": "use",
+		"body": ["Use ${1:Table}"],
+		"description": "Use database table"
+	},
+	
+	"From Clause": {
+		"prefix": "from",
+		"body": ["From ${1:Table}"],
+		"description": "SQL From clause"
+	},
+	
+	"Where Clause": {
+		"prefix": "where",
+		"body": ["Where ${1:condition}"],
+		"description": "SQL Where clause"
+	},
+
+	"// ===== SPECIAL KEYWORDS =====": {},
+	
+	"Default Parameter": {
+		"prefix": "default",
+		"body": ["Default ${1:parameter} := ${2:defaultValue}"],
+		"description": "Set default parameter value"
+	},
+	
+	"Optional Parameter": {
+		"prefix": "optional",
+		"body": ["Optional"],
+		"description": "Mark parameter as optional"
+	},
+	
+	"Pixel Unit": {
+		"prefix": "pixel",
+		"body": ["Pixel"],
+		"description": "Pixel measurement unit"
+	},
+	
+	"Centered Position": {
+		"prefix": "centered",
+		"body": ["Centered"],
+		"description": "Centered positioning"
+	},
+	
+	"Get Control": {
+		"prefix": "get",
+		"body": ["Get ${1:variable}"],
+		"description": "Input control"
+	},
+
+	"// ===== COMMON FUNCTIONS =====": {},
+	
+	"Space Function": {
+		"prefix": "space",
+		"body": ["Space(${1:length})"],
+		"description": "Create string of spaces"
+	},
+	
+	"Replicate Function": {
+		"prefix": "replicate",
+		"body": ["Replicate(\"${1:char}\", ${2:count})"],
+		"description": "Replicate character n times"
+	},
+	
+	"Date Function": {
+		"prefix": "date",
+		"body": ["Date()"],
+		"description": "Current date function"
+	},
+	
+	"Return Statement": {
+		"prefix": "return",
+		"body": ["Return ${1:value}"],
+		"description": "Return statement"
+	},
+
+	"// ===== COMPLETE TEMPLATES =====": {},
+	
+	"Complete Program Template": {
+		"prefix": "program",
+		"body": [
+			"#Include \"protheus.ch\"",
+			"",
+			"/*/{Protheus.doc} ${1:ProgramName}",
+			"\t${2:Program description}",
+			"\t@type  Function",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"Function ${1:ProgramName}()",
+			"\tLocal ${6:cResult} := \"\"",
+			"\t",
+			"\t${7:// Program logic here}",
+			"\t",
+			"Return ${6:cResult}",
+			"",
+			"/*/{Protheus.doc} ${8:HelperFunction}",
+			"\t${9:Helper function description}",
+			"\t@type  Static Function",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"Static Function ${8:HelperFunction}()",
+			"\t$0",
+			"Return"
+		],
+		"description": "Complete program template with main and helper functions"
+	},
+	
+	"Complete Class Template": {
+		"prefix": "classtemplate",
+		"body": [
+			"#Include \"protheus.ch\"",
+			"",
+			"/*/{Protheus.doc} ${1:ClassName}",
+			"\t${2:Class description}",
+			"\t@author ${3:$TM_USERNAME}",
+			"\t@since ${4:$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR}",
+			"\t@version ${5:1.0}",
+			"/*/",
+			"Class ${1:ClassName}",
+			"\tData ${6:cName} AS Character",
+			"\tData ${7:nValue} AS Numeric",
+			"\tData ${8:lActive} AS Logical",
+			"\t",
+			"\tMethod New() Constructor",
+			"\tMethod SetName(cNewName)",
+			"\tMethod GetName()",
+			"\tMethod SetValue(nNewValue)",
+			"\tMethod GetValue()",
+			"EndClass",
+			"",
+			"Method New() Class ${1:ClassName}",
+			"\t::${6:cName} := \"\"",
+			"\t::${7:nValue} := 0",
+			"\t::${8:lActive} := .T.",
+			"Return Self",
+			"",
+			"Method SetName(cNewName) Class ${1:ClassName}",
+			"\t::${6:cName} := cNewName",
+			"Return",
+			"",
+			"Method GetName() Class ${1:ClassName}",
+			"Return ::${6:cName}",
+			"",
+			"Method SetValue(nNewValue) Class ${1:ClassName}",
+			"\t::${7:nValue} := nNewValue",
+			"Return",
+			"",
+			"Method GetValue() Class ${1:ClassName}",
+			"Return ::${7:nValue}"
+		],
+		"description": "Complete class template with properties and methods"
+	}
+}
